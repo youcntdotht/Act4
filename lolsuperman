@@ -1,3 +1,5 @@
+#PROGRAMA DE CONSUMO DE REFRESCOS, CON BASE A LA ENCUESTA REALIZADA 
+#EN LA ACTIVIDAD 1
 ml.dia <- c(750, 1000, 250, 750, 1000, 250, 500, 750, 250, 500, 750, 750, 1000,
             250, 250, 500, 1000, 250, 250, 1000, 750, 250, 500, 500, 1000,
             250, 250, 750, 750, 500, 750, 750, 500, 250, 250, 1000, 500,
@@ -8,13 +10,34 @@ ml.dia <- c(750, 1000, 250, 750, 1000, 250, 500, 750, 250, 500, 750, 750, 1000,
             750, 250, 500, 750, 750, 500, 750, 750, 750, 750, 750, 250,
             1000, 1000, 500, 1000, 250, 250, 1000, 750, 500, 500, 750, 750,
             750, 250, 250, 1000, 1000, 500, 750, 750, 750, 750, 1000, 750
-            )
+)
+#CANTIDAD DE DATOS TOTALES
 t <- length(ml.dia)
-print(t)
+cat("Datos totales:", t)
 
 media <- mean(ml.dia)
 vari <- var(ml.dia)
 d.e <- sd(ml.dia)
 
-medidas <- c(media, vari, de)
-print(medidas)
+#Con los datos imprimimos, las diferentes medidas de tendencia central
+cat("Media:", media, "\n")
+cat("Desviación estándar:", d.e, "\n")
+cat("Varianza:",vari, "\n")
+
+#CUAL ES LA PROBABILIDAD DE QUE X SEA MAYOR AL CONSUMO DE 750 ML 
+probabilidad_720_ml <- pnorm(750, media, d.e)
+
+cat ("l P(X>750) =", round (probabilidad_720_ml, 4))
+
+#Con los datos se pide construir un intervalo de confianza del 90% de 
+#seguridad para estimar la edad promedio de los ciudadanos.
+
+alpha <- 0.10
+z <- qnorm(1 - alpha/2)
+margen_De_error <- z * (d.e / sqrt(t))
+
+limite_inf <- media - margen_De_error
+limite_sup <- media + margen_De_error
+
+cat("Intervalo de confianza del 90% para el consumo promedio de refrescos:\n")
+cat("[", round(limite_inf, 3), ",", round(limite_sup, 3), "]\n")
