@@ -61,3 +61,10 @@ polygon(c(x_sombreado, 750), c(y_sombreado, 0), col = "grey")
 text(media, max(y)*0.9, paste("Media =", round(media, 2)), col = "brown", pos = 4) 
 
 text(750, max(y)*0.4, "Área = P(X < 750)", col = "blue")
+
+# Agregar una gráfica de pie
+consumo_refrescos <- table(ml.dia)
+labels <- paste(names(consumo_refrescos), "ml (", round(consumo_refrescos/sum(consumo_refrescos)*100, 1), "%)")
+pie(consumo_refrescos, labels = labels, main = "Distribución del consumo de refrescos", col = rainbow(length(consumo_refrescos)))
+
+text(750, max(y)*0.4, "Área = P(X < 750)", col = "blue")
