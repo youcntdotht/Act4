@@ -52,7 +52,7 @@ plot(x, y, type = "l", lwd = 2, col = "red",
      xlab = "Mililitros consumidos por día", 
      ylab = "Densidad de probabilidad")
 
-x_sombreado <- seq(250, 750, 0.1)
+x_sombreado <- seq(200, 750, 0.1)
 
 y_sombreado <- dnorm(x_sombreado, mean = media, sd = d.e)
 
