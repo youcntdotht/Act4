@@ -13,7 +13,7 @@ ml.dia <- c(750, 1000, 250, 750, 1000, 250, 500, 750, 250, 500, 750, 750, 1000,
 )
 #CANTIDAD DE DATOS TOTALES
 t <- length(ml.dia)
-cat("Datos totales:", t)
+cat("Datos totales:", t, "\n")
 
 media <- mean(ml.dia)
 vari <- var(ml.dia)
@@ -39,5 +39,25 @@ margen_De_error <- z * (d.e / sqrt(t))
 limite_inf <- media - margen_De_error
 limite_sup <- media + margen_De_error
 
-cat("Intervalo de confianza del 90% para el consumo promedio de refrescos:\n")
-cat("[", round(limite_inf, 3), ",", round(limite_sup, 3), "]\n")
+cat(" Intervalo de confianza del 90% para el consumo promedio de refrescos:\n")
+cat("[", round(limite_inf, 3), ",", round(limite_sup, 3),"]\n")
+
+#GRAFICA
+x <- seq(250, 1000, 0.1)
+
+y <- dnorm(x, mean = media, sd = d.e)
+
+plot(x, y, type = "l", lwd = 2, col = "red",
+     main = "Distribución normal del consumo de refrescos",
+     xlab = "Mililitros consumidos por día", 
+     ylab = "Densidad de probabilidad")
+
+x_sombreado <- seq(250, 750, 0.1)
+
+y_sombreado <- dnorm(x_sombreado, mean = media, sd = d.e)
+
+polygon(c(x_sombreado, 750), c(y_sombreado, 0), col = "grey")
+
+text(media, max(y)*0.9, paste("Media =", round(media, 2)), col = "brown", pos = 4) 
+
+text(750, max(y)*0.4, "Área = P(X < 750)", col = "blue")
