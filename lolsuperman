@@ -6,7 +6,7 @@ library(tidyr)
 
 # Cargar datos
 ml.dia <- read_excel(
-  "C:/Users/alfre/Downloads/ESTUDIO SOBRE EL CONSUMO DE LOS REFRESCOS _)(1-121).xlsx",
+  "ruta del archivo con /",
   sheet = "Hoja1",
   range = "A1:K11",
   col_names = FALSE
