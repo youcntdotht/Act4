@@ -1,12 +1,25 @@
 # PROGRAMA DE CONSUMO DE REFRESCOS, CON BASE EN LA ENCUESTA REALIZADA EN LA ACTIVIDAD 1
+
+#Instalar Rtools en https://cran.r-project.org/bin/windows/Rtools/
+
+#Correr por separado
+
+install.packages("devtools")
+devtools::install_github("zmeers/ggparliament")
+
+#Correr aparte
+
 library(readxl)
 library(dplyr)
 library(DescTools)
 library(tidyr)
+library(ggparliament)
+library(tidyverse)
+library(plotrix)
 
 # Cargar datos
 ml.dia <- read_excel(
-  "ruta del archivo con /",
+  "C:/Users/alfre/Downloads/ESTUDIO SOBRE EL CONSUMO DE LOS REFRESCOS _)(1-121).xlsx",
   sheet = "Hoja1",
   range = "A1:K11",
   col_names = FALSE
@@ -75,18 +88,34 @@ text(750, max(y)*0.4, "Área = P(X < 750)", col = "blue")
 consumo_refrescos <- table(columna)
 print(consumo_refrescos)
 
-# GRÁFICO DE BARRAS
-barplot(consumo_refrescos,
-        main = "Consumo de refrescos por cantidad (ml)",
-        xlab = "Mililitros por día",
-        ylab = "Número de personas",
-        col = c("skyblue", "orange", "lightgreen", "pink"),
-        ylim = c(0, max(consumo_refrescos) + 5))
 
-# GRÁFICA DE PIE
-labels <- paste(names(consumo_refrescos), "ml (", 
-                round(consumo_refrescos/sum(consumo_refrescos)*100, 1), "%)")
+#Grafico parlamento
 
-pie(consumo_refrescos, labels = labels,
-    main = "Distribución del consumo de refrescos",
-    col = rainbow(length(consumo_refrescos)))
+df_parlamento <- as.data.frame(consumo_refrescos)
+colnames(df_parlamento) <- c("category", "seats")
+
+df_parlamento$party_short <- df_parlamento$category
+df_parlamento$colour <- rainbow(nrow(df_parlamento))
+
+parlamento <- parliament_data(
+  election_data = df_parlamento,
+  type = "semicircle",
+  parl_rows = 8,
+  party_seats = df_parlamento$seats
+)
+
+ggplot(parlamento, aes(x = x, y = y, colour = party_short)) +
+  geom_parliament_seats() + 
+  theme_ggparliament() +
+  labs(title = "Consumo de refrescos — gráfico tipo parlamento") +
+  scale_colour_manual(values = parlamento$colour, 
+                      limits = parlamento$party_short)
+
+
+# Agregar una gráfica de pie (pastel) en 3D
+
+consumo_refrescos <- table(columna)
+labels <- paste(names(consumo_refrescos), 
+                "ml (", round(consumo_refrescos/sum(consumo_refrescos)*100, 1), "%)")
+pie3D(consumo_refrescos, labels = labels, main = "Distribución del consumo de refrescos", 
+      col = rainbow(length(consumo_refrescos)))
