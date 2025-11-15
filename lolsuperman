@@ -80,7 +80,7 @@ y_sombreado <- dnorm(x_sombreado, mean = media, sd = d.e)
 
 polygon(c(x_sombreado, 750), c(y_sombreado, 0), col = "grey")
 
-
+text(750,max(y)*0.6, "Militros consumidos por personas", col="black", pos = 2)
 text(media, max(y)*0.9, paste("Media =", round(media, 2)), col = "brown", pos = 4)
 text(750, max(y)*0.4, "Área = P(X < 750)", col = "blue")
 
