@@ -1,13 +1,16 @@
 # PROGRAMA DE CONSUMO DE REFRESCOS, CON BASE EN LA ENCUESTA REALIZADA EN LA ACTIVIDAD 1
 
+#ES IMPORTANTE SWGUIR LO QUE PUSE ABAJO
+
 #Instalar Rtools en https://cran.r-project.org/bin/windows/Rtools/
 
-#Correr por separado
+#Correr por separado ->
 
 install.packages("devtools")
 devtools::install_github("zmeers/ggparliament")
 
-#Correr aparte
+#Borrar lo de arriba y correr el resto por separado
+
 
 library(readxl)
 library(dplyr)
